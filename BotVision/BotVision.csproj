@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <Configurations>Debug;Release;Public</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(Configuration)=='Public'">
+        <DefineConstants>$(DefineConstants);PUBLIC</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup>
+        <AvaloniaResource Include="**\*.xaml;Assets\*;Resources\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Condition="$(Configuration) != 'Public'" Include="..\MachineheadTetsujin\MachineheadTetsujin.csproj" />
+      <ProjectReference Include="..\Tatooine\Tatooine.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+      <PackageReference Include="Avalonia" Version="0.7.1-cibuild0001731-beta" />
+      <PackageReference Include="Fody" Version="4.2.1" />
+      <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
+    </ItemGroup>
+
+</Project>

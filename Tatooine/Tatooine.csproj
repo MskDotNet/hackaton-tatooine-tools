@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType Condition="$(Configuration) != 'Public'">Exe</OutputType>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <LangVersion>7.3</LangVersion>
+        <Configurations>Debug;Release;Public</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(Configuration)=='Public'">
+        <DefineConstants>$(DefineConstants);PUBLIC</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup>
+        <AvaloniaResource Include="**\*.xaml;Assets\*;Resources\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="0.7.1-cibuild0001731-beta" />
+        <PackageReference Include="Avalonia.Skia.Linux.Natives" Version="1.68.0.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.7.1-cibuild0001731-beta" />
+        <PackageReference Include="Fody" Version="4.2.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Pathfinder\Pathfinder.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition="$(Configuration) == 'Public'">
+        <Compile Remove="PathfinderHighlighters.cs" />
+        <Compile Remove="Program.cs" />
+    </ItemGroup>
+</Project>

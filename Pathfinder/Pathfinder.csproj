@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <Configurations>Debug;Release;Public</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    </ItemGroup>
+    <ItemGroup Condition="$(Configuration) == 'Public'">
+        <Compile Remove="GraphNode.cs" />
+        <Compile Remove="PathMatrix.cs" />
+        <Compile Remove="MapFileGraphLoader.cs" />
+    </ItemGroup>
+</Project>

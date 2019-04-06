@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:Tatooine" Width="1000" Height="800" 
+  x:Class="Tatooine.EditorWindow" Title="{Binding Title}">
+  <DockPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+        <StackPanel.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0%,100%" >
+                <GradientStop Color="#b6eff6" Offset="0" />
+                <GradientStop Color="#d0d0f0" Offset="1" />
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <StackPanel.Styles>
+            <Style Selector="StackPanel > :is(Control)">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Style>
+            <Style Selector="StackPanel > TextBlock, StackPanel > Slider">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </StackPanel.Styles>
+        <Button Content="New" Command="{Binding New}"/>
+        <Button Content="Open" Command="{Binding Open}"/>
+        <Button Content="Save" Command="{Binding Save}"/>
+        <Button Content="SaveAs" Command="{Binding SaveAs}"/>
+        <Button Content="Mirror" Command="{Binding Mirror}"/>
+        <TextBlock>Zoom:</TextBlock>
+        <Slider Minimum="8" Maximum="64" Value="{Binding ElementName=field, Path=HexagonSize}" Width="100"/>
+        <TextBlock>Radius</TextBlock>
+        <NumericUpDown Minimum="2" Maximum="256" Value="{Binding Radius}"/>
+        <TextBlock>Sight</TextBlock>
+        <NumericUpDown Minimum="1" Maximum="4" Value="{Binding SightRadius}"/>
+        <DropDown Items="{Binding AvailableTerrainBrushes}" SelectedItem="{Binding TerrainBrush}" Background="White"/>
+        <DropDown Items="{Binding HighlightModes}" SelectedItem="{Binding HighlightMode}" Background="White"/>
+        <CheckBox IsChecked="{Binding ElementName=field, Path=DarkFow}">Dark FoW</CheckBox>
+    </StackPanel>
+    <Rectangle Height="1" Fill="#ff606060" DockPanel.Dock="Top"/>  
+    <ContentControl Margin="5" HorizontalContentAlignment="Center" DockPanel.Dock="Bottom" Content="{Binding ElementName=field, Path=HighlightLocation}"/>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <ContentControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <local:GameFieldView x:Name="field" Field="{Binding GameField}" HighlightMode="{Binding HighlightMode}"/>
+        </ContentControl>
+    </ScrollViewer>
+  </DockPanel>
+</Window>
